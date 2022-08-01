@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<base target="_top">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>網頁面板</title>
+	</head>
+	<body>
+	  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+      <script>
+		var msg = {  
+          "type": "flex",
+          "altText": "測試",
+          "contents": {
+			  "type": "bubble",
+			  "body": {
+				"type": "box",
+				"layout": "vertical",
+				"spacing": "lg",
+				"contents": [
+				  {
+					"type": "text",
+					"text": "測試",
+					"align": "center",
+					"weight": "bold"
+				  },
+				  {
+					"type": "button",
+					"action": {
+					  "type": "uri",
+					  "label": "Google",
+					  "uri": "https://www.google.com"
+					},
+					"style": "primary",
+					"color": "#dd4b39"
+				  },
+				  {
+					"type": "button",
+					"action": {
+					  "type": "uri",
+					  "label": "Facebook",
+					  "uri": "https://www.facebook.com"
+					},
+					"style": "primary",
+					"color": "#1877f2"
+				  },
+				  {
+					"type": "button",
+					"action": {
+					  "type": "uri",
+					  "label": "Youtube",
+					  "uri": "https://www.Youtube.com"
+					},
+					"style": "primary",
+					"color": "#c4302b"
+				  }				 
+				]
+			  }
+			}
+		};
+	    let urlParams = new URLSearchParams(window.location.search);
+	    const params = urlParams.has('liff.state')? new URLSearchParams(urlParams.get('liff.state')) : urlParams;
+		const liffId = urlParams.get('liffId') ?? params.get('liffId');
+
+		window.onload = function(){
+			liff
+				.init({
+				liffId: liffId
+		    }).then(() => {
+				if (liff.isLoggedIn()) {
+					if (liff.isApiAvailable('shareTargetPicker')) {
+						liff.shareTargetPicker([msg])
+					}
+					else {
+						liff.sendMessages([msg])
+						.then(() => {
+						  document.body.innerHTML = "<p>init</p>";
+						  liff.closeWindow();
+						})
+						.catch((err) => {
+						});			
+					}
+				} else {
+					liff.login();
+				}
+			})			
+			.catch((err) => {
+			    document.body.innerHTML = "<p>"+JSON.stringify(err)+"</p>";
+			});			
+		};
+		</script>
+	</body>
+</html>
