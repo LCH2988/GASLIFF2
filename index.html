@@ -1,93 +1,67 @@
-﻿<html>
-	<head>
-		<base target="_top">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>網頁面板</title>
-	</head>
-	<body>
-	  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-      <script>
-		var msg = {  
-          "type": "flex",
-          "altText": "測試",
-          "contents": {
-			  "type": "bubble",
-			  "body": {
-				"type": "box",
-				"layout": "vertical",
-				"spacing": "lg",
-				"contents": [
-				  {
-					"type": "text",
-					"text": "測試",
-					"align": "center",
-					"weight": "bold"
-				  },
-				  {
-					"type": "button",
-					"action": {
-					  "type": "uri",
-					  "label": "Google",
-					  "uri": "https://www.google.com"
-					},
-					"style": "primary",
-					"color": "#dd4b39"
-				  },
-				  {
-					"type": "button",
-					"action": {
-					  "type": "uri",
-					  "label": "Facebook",
-					  "uri": "https://www.facebook.com"
-					},
-					"style": "primary",
-					"color": "#1877f2"
-				  },
-				  {
-					"type": "button",
-					"action": {
-					  "type": "uri",
-					  "label": "Youtube",
-					  "uri": "https://www.Youtube.com"
-					},
-					"style": "primary",
-					"color": "#c4302b"
-				  }				 
-				]
-			  }
-			}
-		};
-	    let urlParams = new URLSearchParams(window.location.search);
-	    const params = urlParams.has('liff.state')? new URLSearchParams(urlParams.get('liff.state')) : urlParams;
-		const liffId = urlParams.get('liffId') ?? params.get('liffId');
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<script type="text/javascript">
+var dateReviver = function (key, value) {
+    var a;
+    if (typeof value === 'string') {
+        a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
+        if (a) {
+            return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));
+        }
+    }
+    return value;
+};
+function bestdaylong_inq(orderID,Mob,atmNO)
+{
+var xmlhttp;
 
-		window.onload = function(){
-			liff
-				.init({
-				liffId: liffId
-		    }).then(() => {
-				if (liff.isLoggedIn()) {
-					if (liff.isApiAvailable('shareTargetPicker')) {
-						liff.shareTargetPicker([msg])
-					}
-					else {
-						liff.sendMessages([msg])
-						.then(() => {
-						  document.body.innerHTML = "<p>init</p>";
-						  liff.closeWindow();
-						})
-						.catch((err) => {
-						});			
-					}
-				} else {
-					liff.login();
-				}
-			})			
-			.catch((err) => {
-			    document.body.innerHTML = "<p>"+JSON.stringify(err)+"</p>";
-			});			
-		};
-		</script>
-	</body>
+        if (window.XMLHttpRequest)
+          {// code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp=new XMLHttpRequest();
+          }
+        else
+          {// code for IE6, IE5
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+          }
+        xmlhttp.onreadystatechange=function()
+          {
+                  if (xmlhttp.readyState==4 && xmlhttp.status==200)      
+                  {
+                        var result=xmlhttp.responseText;
+                        var obj = JSON.parse(result,dateReviver);//解析json字串為json物件形式
+                                                
+                        var html = '<table border=1 width=100%>';//
+                        
+                        for (var i = 0; i < obj.length; i ++ ) {//
+                                html  += '<tr>';//
+                                for(j=0;j<obj[i].data.length;j++)
+                                {
+                                  html+= '<td>'+obj[i].data[j]+'</td>';
+                                }
+                                html  += '</tr>';            
+                        }
+                        html+="</table>";
+                        
+                        document.getElementById("order_status").innerHTML=html;
+                        if(obj.length==1) //只有一筆代表查不到資料
+                                alert('查無資料');
+                  }
+
+          }
+    var url="https://script.google.com/macros/s/AKfycbydDs2MyPjZZIvHOrXnEcS8i8Tof-2gKM7l-RsJTg/exec";
+    xmlhttp.open("get",url+"?orderID="+orderID+"&Mob="+Mob+"&atmNO="+atmNO,true);
+    xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+輸入訂單編號：<input id="orderID" type="text" /><br />
+輸入手機號碼：<input id="Mob" type="text" /><br />
+輸入匯款後3碼(不輸入表示要查詢)：<input id="atmNO" type="text" /><br />
+<input name="inq" onclick="bestdaylong_inq(orderID.value,Mob.value,atmNO.value);" type="button" value="送出" />
+
+<span id="order_status"></span>
+</body>
 </html>
