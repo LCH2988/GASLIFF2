@@ -60,7 +60,7 @@
     var parameter1 = {};
     var appUrl = 'https://script.google.com/macros/s/AKfycbxNL0NQd8b0NwOSkcPkZKNL_BmdODkxVEX2LR66Lhsif4cN7Cg/exec';
     
-  $(function doGetb() {
+ $(function doGetb() {
      parameter1 = {
                   url:'https://docs.google.com/spreadsheets/d/1e-Pb5eExJEOMnDTHvhbgfI-Q__S72cuoVJGTPlHobcE/edit#gid=229851218',  
                   name:'sheet2',
@@ -68,8 +68,8 @@
                   startColumn: 2,
                   };
                   //專案01=2,2.5.8.11.14  ; 專案06=27,2
-  $.get(appUrl, parameter1, function(data) {
-	  	if(!data){show.text('無資料');}else{show.text(data);}});});
+  $.get(appUrl, parameter1, function(A2name) {
+	  	if(!A2name){show.text('無資料');}else{show.text(A2name);}});});
   
   $(function doGetb() {
      parameter1 = {
@@ -80,8 +80,9 @@
                   };
                   //A01=4,3  ; B02=4,6 ; C01=4,9 ; D01=4,12 ; E01=4,15
                   //F01=29,3 ;G01=29,6 ;G01=29,9 ;G01=29,12 ;G01=29,15
-  $.get(appUrl, parameter1, function(data) {
-	  	if(!data){show1.text('無資料');}else{show1.text(data);}});});
+  $.get(appUrl, parameter1, function(A3name) {
+	  	if(!A3name){show1.text('無資料');}else{show1.text(A3name);}});});
+  
   
   $(function doGetb() {
      parameter1 = {
