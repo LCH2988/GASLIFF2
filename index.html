@@ -57,7 +57,7 @@
         var d2="4";
         var e1="2";
         var e2="7";
-    var parameters = {};
+    var parameter = {};
     var appUrl = "https://script.google.com/macros/s/AKfycbxNL0NQd8b0NwOSkcPkZKNL_BmdODkxVEX2LR66Lhsif4cN7Cg/exec";
     
     $(function doGetb() {
@@ -127,8 +127,10 @@
                 + currentdate.getHours() + ":"
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
+           var status = "false";
           // 打包 要的資料
           var data = {
+            'status':status,
             'name' : name,
             'phone':phone,
             'time': filltime,
