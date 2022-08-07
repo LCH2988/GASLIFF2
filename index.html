@@ -48,47 +48,44 @@
     var show1 = $('#show1');
     var show2 = $('#show2');
         var a1="2";
-        var a2="5";
-        var b1="9";
-        var b2="5";
-        var c1="9";
-        var c2="6";
-        var d1="9";
-        var d2="7";
+        var a2="2";
+        var b1="6";
+        var b2="2";
+        var c1="6";
+        var c2="3";
+        var d1="6";
+        var d2="4";
         var e1="2";
         var e2="7";
-    var parameter1 = {};
+    var parameters = {};
     var appUrl = "https://script.google.com/macros/s/AKfycbxNL0NQd8b0NwOSkcPkZKNL_BmdODkxVEX2LR66Lhsif4cN7Cg/exec";
     
-  $(function doGetb() {
-     parameter1 = {
-                  optino:"1A+1",
-                  };
-                  //專案01=2,2.5.8.11.14  ; 專案06=27,2
-  $.get(appUrl, parameter1, function(data) {
-	  	if(!data){show.text('無資料');}else{show.text(data);}});});
-  
-  $(function doGetb() {
-     parameter1 = {
-                option:"2A+1",
-                  };
-                  //A01=4,3  ; B02=4,6 ; C01=4,9 ; D01=4,12 ; E01=4,15
-                  //F01=29,3 ;G01=29,6 ;G01=29,9 ;G01=29,12 ;G01=29,15
-  $.get(appUrl, parameter1, function(data) {
-	  	if(!data){show1.text('無資料');}else{show1.text(data);}});});
-  
-  $(function doGetb() {
-     parameter1 = {
-                 option:"3A+1",
-                  };
-                  //A01=4,4  ; B02=4,7 ; C01=4,10 ; D01=4,13 ; E01=4,16
-                  //F01=29,4 ;G01=29,7 ;G01=29,10 ;G01=29,13 ;G01=29,16
-  $.get(appUrl, parameter1, function(data) {
-	  	if(!data){show2.text('無資料');}else{show2.text(data);}});});
-  
-
+    $(function doGetb() {
+    parameters = {
+    hello:"hello",
+    getUserData: "getUserData",
+    };
+    $.get(appUrl, parameters, function(result) {
+    if(!result){show.text('無資料');}else{show.text(result);}});});
+    
+    $(function doGetb() {
+    parameters = {
+    hello:"hello",
+    getUserData: "getUserData",
+    };
+    $.get(appUrl, parameters, function(result) {
+    if(!result){show1.text('無資料');}else{show1.text(result);}});});
+    
+    $(function doGetb() {
+    parameters = {
+    hello:"hello",
+    getUserData: "getUserData",
+    };
+    $.get(appUrl, parameters, function(result) {
+    if(!result){show2.text('無資料');}else{show2.text(result);}});});
+    
     $(function(){
-        // 監聽 送出訂單 按鈕點擊
+    // 監聽 送出訂單 按鈕點擊
         // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
         $('#sendOrder').click(function(e){
         var status = true;
