@@ -1,47 +1,42 @@
 
-            <!DOCTYPE html>
-            <html lang="en">
-            
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>DOM關係鏈 - 徹底瞭解</title>
-            </head>
-            
-            <body style="text-align: center;">
-            
-                <br>
-                <h1> JS DOM 各種寫法</h1>
-                <br>
-                <h2> 範例一：請按下按鈕來顯示訊息</h2>
-                <br>
-                <input type="button" value="訊息1" onclick="message()">
-                <input type="button" value="訊息2" id="btn2">
-                <input type="button" value="訊息3" id="btn3">
-                <input type="button" value="訊息4" id="btn4">
-                <input type="button" value="訊息5" id="btn5">
-            
-                <br>
-                <p id="display"></p>
-            
-                <br>
-                <br>
-                <br>
-                <hr>
-                <h2>範例二：選擇背景顏色：</h2>
-                <select name="" id="colors" onchange="change()">
-                    <option value="transparent">無色</option>
-                    <option value="lightblue">天空藍</option>
-                    <option value="lightpink">幸福粉</option>
-                    <option value="limegreen">檸檬綠</option>
-            
-                </select>
-            
-           
-            
-            
-            </body>
-            
-            </html>
-      
+             <!DOCTYPE html>
+             <html lang="en">
+             
+             <head>
+                 <meta charset="UTF-8">
+                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                 <meta name="viewport" content="width=device-width>, initial-scale=1.0">
+                 <title>Display Web</title>
+                 <style type="text/css">
+                     html {
+                         overflow: auto;
+                     }
+                     
+                     html,
+                     body,
+                     div,
+                     iframe {
+                         margin: 0px;
+                         padding: 0px;
+                         height: 100%;
+                         border: none;
+                     }
+                     
+                     iframe {
+                         display: block;
+                         width: 100%;
+                         border: none;
+                         overflow-y: auto;
+                         overflow-x: hidden;
+                     }
+                 </style>
+             </head>
+             
+             <body>
+                 <iframe src="https://script.google.com/macros/s/AKfycbzRLxBnJQ7c0kZOOgicmhDv1Q6WmEORYl8OXtONelUCgChUPmb09jmLwHo_fmXhAQ9m/exec" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto">
+               </iframe>
+             
+             </body>
+             
+             </html>
+       
