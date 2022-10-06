@@ -1,38 +1,42 @@
 
-            // 連結HTML檔案
-            
-            function doGet(){
-              var html=HtmlService.createTemplateFromFile("FORM");
-              var check=html.evaluate();
-              var show =check.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
-              return show;
-            }
-            
-            
-            // 新增資料到試算表
-            
-            function addData(rowData){
-                //抓時間 
-              var currentDate=new Date();
-                // 取得目前的試算表檔案
-              var ss=SpreadsheetApp.getActiveSpreadsheet();
-                // 抓試算表名稱
-                // 請輸入您的試算表名稱在這裡
-              var ws=ss.getSheetByName("工作表1");
-
-              //var sheet20 = SpreadsheetApp.openById(sheetid).getSheetByName("@_底層參數設定");
-
-              //var option1 = sheet20.getRange(20, 3).getValue();
-
-              var set1 = ws.getRange(5, 1).setValue(currentDate);
-              var set2 = ws.getRange(5, 2).setValue(rowData.name);
-              var set3 = ws.getRange(5, 3).setValue(rowData.set1);
-              var set4 = ws.getRange(5, 4).setValue(rowData.set2);
-              var set5 = ws.getRange(5, 5).setValue(rowData.set3);
-              var set4 = ws.getRange(5, 6).setValue(rowData.set2);
-              var set5 = ws.getRange(5, 7).setValue(rowData.set3);
-                //插入資料
-              //ws.appendRow([currentDate, rowData.name, rowData.set1,rowData.set2, rowData.setoil1_1,rowData.setoil1_2,rowData.setoil2_1,rowData.setoil2_2]);
-            
-            }
-      
+             <!DOCTYPE html>
+             <html lang="en">
+             
+             <head>
+                 <meta charset="UTF-8">
+                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                 <meta name="viewport" content="width=device-width>, initial-scale=1.0">
+                 <title>Display Web</title>
+                 <style type="text/css">
+                     html {
+                         overflow: auto;
+                     }
+                     
+                     html,
+                     body,
+                     div,
+                     iframe {
+                         margin: 0px;
+                         padding: 0px;
+                         height: 100%;
+                         border: none;
+                     }
+                     
+                     iframe {
+                         display: block;
+                         width: 100%;
+                         border: none;
+                         overflow-y: auto;
+                         overflow-x: hidden;
+                     }
+                 </style>
+             </head>
+             
+             <body>
+                 <iframe src="https://script.google.com/macros/s/AKfycbxYc6AdCmzDu60FTrBwaxXsA2QbrpCewj8DDwSaue-tIaaXnviJBu4d12M6ljkjV3GZwQ/exec" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto">
+               </iframe>
+             
+             </body>
+             
+             </html>
+       
