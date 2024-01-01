@@ -1,43 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIFF Example</title>
-  <!-- 引入 LIFF SDK -->
-  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-</head>
-<body>
+<html>
 
-  <h1>LIFF Example</h1>
+<head>
+  <base target="_top">
+</head>
+
+<body>
+  <h2>輸入資料</h2>
+  <form id="myForm">
+    <label for="inputB">B欄：</label>
+    <input type="text" id="inputB" name="inputB" required><br>
+
+    <label for="inputC">C欄：</label>
+    <input type="text" id="inputC" name="inputC" required><br>
+
+    <label for="inputD">D欄：</label>
+    <input type="text" id="inputD" name="inputD" required><br>
+
+    <button type="button" onclick="submitForm()">確認</button>
+  </form>
 
   <script>
-    // 初始化 LIFF
-    liff.init({ liffId: '2001679903-r5VXNe5g' });
+    function submitForm() {
+      var inputB = document.getElementById("inputB").value;
+      var inputC = document.getElementById("inputC").value;
+      var inputD = document.getElementById("inputD").value;
 
-    // 在事件處理函式中處理 postback 事件
-    liff.ready.then(() => {
-      if (liff.isInClient()) {
-        // 在 LINE 應用內
-        liff.sendMessages([
-          {
-            type: 'text',
-            text: '您正在使用 LINE 應用內的 LIFF。',
-          },
-        ]);
-      } else {
-        // 在外部瀏覽器
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const action = urlParams.get('action');
+      google.script.run.withSuccessHandler(onFormSubmitSuccess).writeToSheet(inputB, inputC, inputD);
+    }
 
-        if (action === 'registration') {
-          // 在這裡處理報名按鈕的 postback 事件
-          alert('觸發報名事件！');
-        }
-      }
-    });
+    function onFormSubmitSuccess() {
+      alert('資料已成功寫入試算表！');
+      document.getElementById("myForm").reset();
+    }
   </script>
 </body>
+
 </html>
