@@ -23,7 +23,20 @@
     <button type="button" onclick="submitForm()">確認</button>
   </form>
 
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
+    // 初始化 LINE LIFF
+    liff.init({ liffId: '2001679903-r5VXNe5g' }).then(() => {
+      console.log('LIFF initialized');
+
+      // 透過 LIFF 獲取用戶資訊
+      liff.getProfile().then(function (profile) {
+        console.log('User ID:', profile.userId);
+      });
+    }).catch((error) => {
+      console.error('LIFF initialization failed', error);
+    });
+
     function submitForm() {
       var name = document.getElementById('name').value;
       var count = document.getElementById('count').value;
@@ -45,16 +58,6 @@
         alert('報名成功！');
       });
     }
-  </script>
-
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script>
-    // 初始化 LINE LIFF
-    liff.init({ liffId: '2001679903-r5VXNe5g' }).then(() => {
-      console.log('LIFF initialized');
-    }).catch((error) => {
-      console.error('LIFF initialization failed', error);
-    });
   </script>
 </body>
 
