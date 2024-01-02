@@ -1,38 +1,60 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <base target="_top">
+  <meta charset="UTF-8">
+  <title>報名系統</title>
 </head>
 
 <body>
-  <h2>輸入資料</h2>
-  <form id="myForm">
-    <label for="inputB">B欄：</label>
-    <input type="text" id="inputB" name="inputB" required><br>
+  <h2>報名表單</h2>
+  <form id="signupForm">
+    <label for="name">姓名：</label>
+    <input type="text" id="name" name="name" required><br>
 
-    <label for="inputC">C欄：</label>
-    <input type="text" id="inputC" name="inputC" required><br>
+    <label for="count">人數：</label>
+    <input type="number" id="count" name="count" required><br>
 
-    <label for="inputD">D欄：</label>
-    <input type="text" id="inputD" name="inputD" required><br>
+    <label for="remarks">備註：</label>
+    <input type="text" id="remarks" name="remarks"><br>
 
     <button type="button" onclick="submitForm()">確認</button>
   </form>
 
   <script>
     function submitForm() {
-      var inputB = document.getElementById("inputB").value;
-      var inputC = document.getElementById("inputC").value;
-      var inputD = document.getElementById("inputD").value;
+      var name = document.getElementById('name').value;
+      var count = document.getElementById('count').value;
+      var remarks = document.getElementById('remarks').value;
 
-      google.script.run.withSuccessHandler(onFormSubmitSuccess).writeToSheet(inputB, inputC, inputD);
-    }
+      // 取得 LINE 使用者ID
+      liff.getProfile().then(function (profile) {
+        var userId = profile.userId;
 
-    function onFormSubmitSuccess() {
-      alert('資料已成功寫入試算表！');
-      document.getElementById("myForm").reset();
+        // 將報名資訊發送到 Google Apps Script
+        google.script.run.doPost({
+          userId: userId,
+          name: name,
+          count: count,
+          remarks: remarks
+        });
+
+        // 提示報名成功
+        alert('報名成功！');
+      });
     }
+  </script>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    // 初始化 LINE LIFF
+    liff.init({ liffId: 'YOUR_LIFF_ID' }).then(() => {
+      console.log('LIFF initialized');
+    }).catch((error) => {
+      console.error('LIFF initialization failed', error);
+    });
   </script>
 </body>
 
