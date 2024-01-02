@@ -1,13 +1,16 @@
-<!-- index.html -->
-
+<!-- SignUpForm.html -->
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="UTF-8">
-  <title>報名系統</title>
+  <base target="_top">
+  <title>報名表單</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
-
 <body>
   <h2>報名表單</h2>
   <form id="signupForm">
@@ -17,29 +20,21 @@
     <label for="count">人數：</label>
     <input type="number" id="count" name="count" required><br>
 
-    <label for="remarks">備註：</label>
-    <input type="text" id="remarks" name="remarks"><br>
+    <label for="remark">備註：</label>
+    <textarea id="remark" name="remark"></textarea><br>
 
-    <button type="button" onclick="submitForm()">確認</button>
+    <input type="button" value="確認報名" onclick="submitForm()">
   </form>
+
   <script>
-      function submitForm() {
+    function submitForm() {
       var name = document.getElementById('name').value;
       var count = document.getElementById('count').value;
-      var remarks = document.getElementById('remarks').value;
+      var remark = document.getElementById('remark').value;
 
-        // 將報名資訊發送到 Google Apps Script
-        google.script.run.doPost({
-          name: name,
-          count: count,
-          remarks: remarks
-        });
-
-        // 提示報名成功
-        alert('報名成功！');
-      });
+      google.script.run.doPost({ name: name, count: count, remark: remark });
+      document.getElementById('signupForm').innerHTML = '<p>報名成功！</p>';
     }
   </script>
 </body>
-
 </html>
