@@ -25,30 +25,13 @@
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
-    // 初始化 LINE LIFF
-    liff.init({ liffId: '2001679903-r5VXNe5g' }).then(() => {
-      console.log('LIFF initialized');
-
-      // 透過 LIFF 獲取用戶資訊
-      liff.getProfile().then(function (profile) {
-        console.log('User ID:', profile.userId);
-      });
-    }).catch((error) => {
-      console.error('LIFF initialization failed', error);
-    });
-
-    function submitForm() {
+      function submitForm() {
       var name = document.getElementById('name').value;
       var count = document.getElementById('count').value;
       var remarks = document.getElementById('remarks').value;
 
-      // 取得 LINE 使用者ID
-      liff.getProfile().then(function (profile) {
-        var userId = profile.userId;
-
         // 將報名資訊發送到 Google Apps Script
         google.script.run.doPost({
-          userId: userId,
           name: name,
           count: count,
           remarks: remarks
